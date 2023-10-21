@@ -24,6 +24,7 @@ export default {
           "neutral-content": "#F4F4F6",
           "base-content": "#000000",
           "--rounded-btn": "0.375rem",
+          "--rounded-box": "none",
           "--btn-text-case": "none",
         },
       },
