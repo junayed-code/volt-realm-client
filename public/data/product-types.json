@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Laptop",
+    "image": "/images/product-types/laptop.jpg"
+  },
+  {
+    "name": "Earphones",
+    "image": "/images/product-types/earphones.jpg"
+  },
+  {
+    "name": "Phone",
+    "image": "/images/product-types/phone.jpg"
+  },
+  {
+    "name": "Smartwatch",
+    "image": "/images/product-types/smartwatch.png"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Google",
+    "image": "/images/logos/google.png"
+  },
+  {
+    "name": "Apple",
+    "image": "/images/logos/apple.png"
+  },
+  {
+    "name": "Samsung",
+    "image": "/images/logos/samsung.png"
+  },
+  {
+    "name": "Logitech",
+    "image": "/images/logos/logitech.png"
+  },
+  {
+    "name": "Xiaomi",
+    "image": "/images/logos/xiaomi.png"
+  },
+  {
+    "name": "HP",
+    "image": "/images/logos/hp.png"
+  }
+]
