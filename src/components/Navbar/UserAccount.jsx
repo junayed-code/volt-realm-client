@@ -1,13 +1,15 @@
 import { BsPersonFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks";
 import Button from "../Button";
 
-export default function UserAccount({
-  name = "Junayed",
-  email = "junayed@mail.com",
-  onLogOut,
-}) {
-  const currentUser = true;
+export default function UserAccount() {
+  const navigate = useNavigate();
+  const { currentUser, logOut } = useAuth();
+
+  function handleLogOut() {
+    logOut().then(() => navigate("/login"));
+  }
 
   return (
     <div className="dropdown dropdown-end">
@@ -17,27 +19,30 @@ export default function UserAccount({
         </div>
       </label>
 
-      <div className="mt-3 z-[1] p-2 shadow-md dropdown-content bg-base-100 rounded-md w-52">
+      <div className="mt-3 z-[1] p-3 border shadow-xl dropdown-content bg-base-100 rounded-md w-52">
         {currentUser ? (
           <>
             <div className="text-sm">
-              <h5 className="font-semibold">{name}</h5>
-              <p className="">{email}</p>
+              <h5 className="font-semibold">{currentUser?.displayName}</h5>
+              <p className="">{currentUser?.email}</p>
             </div>
             <hr className="my-3 border-gray-300" />
             <ul tabIndex={0} className="menu menu-sm p-0">
-              <Button onClick={onLogOut} className="btn-primary btn-outline">
+              <Button
+                onClick={handleLogOut}
+                className="btn-primary btn-outline"
+              >
                 Logout
               </Button>
             </ul>
           </>
         ) : (
           <ul className="menu menu-sm p-0 items-stretch gap-2">
-            <Link>
-              <Button className="btn-secondary w-full">Log In</Button>
+            <Link to="/login">
+              <Button className="btn-secondary text-base w-full">Log In</Button>
             </Link>
-            <Link>
-              <Button className="btn-secondary btn-outline w-full">
+            <Link to="/signup">
+              <Button className="btn-secondary text-base btn-outline w-full">
                 Sign Up
               </Button>
             </Link>

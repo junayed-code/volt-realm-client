@@ -21,7 +21,7 @@ export default function MobileNavItems() {
       </label>
 
       <div
-        className={`grid lg:hidden fixed inset-0 z-50 overflow-y-auto ${
+        className={`grid lg:hidden fixed inset-0 z-50 overflow-y-auto overflow-x-hidden ${
           isMenuOpen ? "visible" : "invisible"
         }`}
       >
