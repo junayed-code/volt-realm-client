@@ -1,8 +1,13 @@
-# React + Vite
+# Volt Realm
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Volt Realm is an affiliate e-commerce website. It seals renowned top IT company products such as Google, Apple, Samsung, HP, etc. This website design is simple but it is awesome. It has great features to serve clients. Such as:
 
-Currently, two official plugins are available:
+- User can sign in and log in with her email and password.
+- User can log in without email and password using the Google login provider.
+- User can add new products.
+- Also user can update any product.
+- This app has strong form field validation. User can't submit the form without validating each form field.
+- This app also have a cart store.
+- User can add products to the cart store.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### [Live Link](https://voltrealm.surge.sh/)
