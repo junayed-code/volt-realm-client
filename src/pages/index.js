@@ -1,0 +1,9 @@
+export { default as Home } from "./Home";
+export { default as SignUp } from "./SignUp";
+export { default as LogIn } from "./LogIn";
+export { default as ErrorPage } from "./ErrorPage";
+export { default as AddProduct } from "./AddProduct";
+export { default as AllProducts } from "./AllProducts";
+export { default as UpdateProduct } from "./UpdateProduct";
+export { default as ProductDetails } from "./ProductDetails";
+export { default as ProductsOfBrand } from "./ProductsOfBrand";
