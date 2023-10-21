@@ -6,7 +6,14 @@ export default function useFetch(url) {
   useEffect(() => {
     fetch(url)
       .then(res => res.json())
-      .then(data => setVariable(data));
+      .then(resData => {
+        if (Array.isArray(resData)) {
+          return setVariable(resData);
+        }
+        if (resData.data) {
+          setVariable(resData.data);
+        }
+      });
   }, []);
 
   return variable;
