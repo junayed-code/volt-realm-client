@@ -36,7 +36,7 @@ export default function AuthProvider({ children }) {
   }, []);
 
   // Define the create-new-user function
-  _auth.createNewUser = async (uname, email, password, photoURL) => {
+  _auth.createNewUser = async (uname, email, password) => {
     try {
       // Update the loading state
       setLoading(true);
@@ -47,8 +47,8 @@ export default function AuthProvider({ children }) {
         email,
         password
       );
-      // Update the user name and profile image
-      await updateProfile(user, { displayName: uname, photoURL });
+      // Update the user name
+      await updateProfile(user, { displayName: uname });
       return user;
     } catch (err) {
       setLoading(false);
