@@ -19,7 +19,7 @@ export default function UserAccount() {
         </div>
       </label>
 
-      <div className="mt-3 z-[1] p-3 border shadow-xl dropdown-content bg-base-100 rounded-md w-52">
+      <div className="mt-3 z-50 p-3 border shadow-xl dropdown-content bg-base-100 rounded-md w-52">
         {currentUser ? (
           <>
             <div className="text-sm">
