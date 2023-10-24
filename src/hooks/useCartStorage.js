@@ -1,15 +1,7 @@
-import StorageManager from "../lib/storageManager";
-
-const manager = new StorageManager("__cart_storage__");
+import { useContext } from "react";
+import { CartStorageContext } from "../providers/CartStorageProvider";
 
 export default function useCartStorage() {
-  return {
-    get cartItems() {
-      return manager.value;
-    },
-
-    updateCart(newValue) {
-      manager.setValue(newValue);
-    },
-  };
+  const { cartItems, addItem, removeItem } = useContext(CartStorageContext);
+  return { cartItems, addItem, removeItem };
 }
