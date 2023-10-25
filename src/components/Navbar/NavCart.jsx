@@ -8,8 +8,7 @@ import Button from "../Button";
 import { useCartStorage } from "../../hooks";
 
 export default function NavCart() {
-  const { cartItems, updateCart } = useCartStorage();
-  const [removeItems, setRemoveItems] = useState(0);
+  const { cartItems, removeItem } = useCartStorage();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const totalPrice = cartItems.reduce((prev, item) => prev + item.price, 0);
 
@@ -18,9 +17,7 @@ export default function NavCart() {
   }
 
   function handleRemoveItemToCart(id) {
-    const updateCartItems = cartItems.filter(item => item.id !== id);
-    updateCart(updateCartItems);
-    setRemoveItems(prev => prev + 1);
+    removeItem(id);
   }
 
   return (
@@ -75,7 +72,7 @@ export default function NavCart() {
               </div>
             )}
 
-            {cartItems.map(item => (
+            {cartItems?.map(item => (
               <CartItem
                 key={item.id}
                 cartItem={item}
