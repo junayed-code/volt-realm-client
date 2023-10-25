@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
-import { useFetch } from "../../hooks";
 import { Section, Container, Card } from "../../components";
+import { useQuery } from "@tanstack/react-query";
+import { fetchData } from "../../utils";
 
 export default function ProductTypes() {
-  const types = useFetch("/data/product-types.json");
+  const { data: types } = useQuery({
+    queryKey: ["product-types"],
+    queryFn: fetchData.bind(null, "/data/product-types.json"),
+    staleTime: 1000 * 60 * 5,
+  });
 
   return (
     <Section className="py-12 md:py-16">
@@ -12,7 +17,7 @@ export default function ProductTypes() {
         <Section.Title>Featured Product Types</Section.Title>
 
         <Section.Content className="mt-8 md:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-4">
-          {types.map(({ name, image }) => (
+          {types?.map(({ name, image }) => (
             <ProductTypeCard key={name} name={name} image={image} />
           ))}
         </Section.Content>

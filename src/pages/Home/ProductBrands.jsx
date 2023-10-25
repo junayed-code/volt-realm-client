@@ -1,16 +1,21 @@
+import { useQuery } from "@tanstack/react-query";
 import { Section, Container, Card } from "../../components";
-import { useFetch } from "../../hooks";
 import Marquee from "react-fast-marquee";
+import { fetchData } from "../../utils";
 
 export default function ProductBrands() {
-  const brands = useFetch("/data/brands.json");
+  const { data: brands } = useQuery({
+    queryKey: ["brands"],
+    queryFn: fetchData.bind(null, "/data/brands.json"),
+    staleTime: 1000 * 60 * 5,
+  });
 
   return (
     <Section className="py-12 md:pt-16 md:pb-24">
       <Container>
         <Section.Title>Our Featured Brands</Section.Title>
         <Marquee className="mt-10" pauseOnHover gradient gradientWidth={80}>
-          {brands.map(brand => (
+          {brands?.map(brand => (
             <BrandCard key={brand.name} name={brand.name} image={brand.image} />
           ))}
         </Marquee>

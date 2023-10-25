@@ -1,10 +1,13 @@
+import { useQuery } from "@tanstack/react-query";
 import { Section, Container, ProductCard } from "../../components";
-import { useFetch } from "../../hooks";
+import { getProducts } from "../../services/api";
 
 export default function TodaySpecial() {
-  const products = useFetch(
-    "https://volt-realm-api.vercel.app/products?limit=8"
-  );
+  const { data: products } = useQuery({
+    queryKey: ["products-8"],
+    queryFn: getProducts.bind(null, { length: 8 }),
+    staleTime: 1000 * 30 * 1,
+  });
 
   return (
     <Section className="py-12 md:py-16">
