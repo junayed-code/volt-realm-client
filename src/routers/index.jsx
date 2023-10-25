@@ -11,10 +11,7 @@ import {
   AllProducts,
   ProductDetails,
 } from "../pages";
-import { productLoader } from "../pages/ProductDetails";
 import PrivateRoutes from "../routers/PrivateRoutes";
-
-const API_END_POINT = "https://volt-realm-api.vercel.app/products";
 
 const router = createBrowserRouter([
   {
@@ -37,22 +34,10 @@ const router = createBrowserRouter([
       {
         path: "all-products",
         element: <AllProducts />,
-        loader: () => fetch(API_END_POINT),
       },
       {
-        path: "/products/brand/:name",
+        path: "/products/brand/:brand",
         element: <ProductsOfBrand />,
-        loader: async ({ params }) => {
-          const res = await fetch(`${API_END_POINT}?brand=${params.name}`);
-          const resObject = await res.json();
-          if (resObject.error) {
-            throw new Response(null, {
-              status: resObject.error?.status,
-              statusText: resObject.error?.message,
-            });
-          }
-          return resObject.data;
-        },
       },
       {
         path: "/",
@@ -65,12 +50,10 @@ const router = createBrowserRouter([
           {
             path: "/products/update/:name",
             element: <UpdateProduct />,
-            loader: productLoader,
           },
           {
             path: "/products/:name",
             element: <ProductDetails />,
-            loader: productLoader,
           },
         ],
       },
