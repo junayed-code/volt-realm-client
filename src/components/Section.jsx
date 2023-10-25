@@ -13,7 +13,9 @@ Section.Heading = ({ className = "", children }) => (
 
 // Section title component
 Section.Title = ({ className = "", children }) => (
-  <h2 className={"text-3xl font-bold mb-5 ".concat(className).trim()}>
+  <h2
+    className={"text-2xl sm:text-3xl font-bold mb-5 ".concat(className).trim()}
+  >
     {children}
   </h2>
 );
