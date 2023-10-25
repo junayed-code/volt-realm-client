@@ -4,6 +4,9 @@ import { useAuth } from "../hooks";
 
 export default function Main() {
   const { loading } = useAuth();
+
+  if (loading) return <Loading />;
+
   return (
     <>
       <Header>
@@ -15,7 +18,6 @@ export default function Main() {
       </main>
 
       <Footer />
-      {loading && <Loading />}
       <ScrollRestoration />
     </>
   );
