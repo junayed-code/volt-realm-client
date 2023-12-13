@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .active {
-  @apply text-neutral lg:underline underline-offset-4;
+  @apply text-base-content lg:underline underline-offset-4;
 }
 
 .button {

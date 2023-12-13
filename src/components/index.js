@@ -8,4 +8,5 @@ export { default as Loading } from "./Loading";
 export { default as Container } from "./Container";
 export { default as StarRating } from "./StarRating";
 export { default as ProductCard } from "./ProductCard";
+export { default as ProductForm } from "./ProductForm";
 export { default as UnexpectedError } from "./UnexpectedError";

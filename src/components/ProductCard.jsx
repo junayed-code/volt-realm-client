@@ -1,14 +1,13 @@
-import slugify from "slugify";
 import Card from "./Card";
 import StarRating from "./StarRating";
 
 export default function ProductCard({ product = {} }) {
-  const { name, image, price, rating, brand } = product;
+  const { name, image, price, rating, brand, nameSlug } = product;
 
   return (
     <Card
-      className="max-w-xs w-full border border-transparent hover:border-secondary"
-      to={`/products/${slugify(name, { lower: true })}`}
+      className="max-w-xs w-full border border-transparent hover:border-base-content/20"
+      to={`/products/${nameSlug}`}
     >
       <Card.Image className="bg-base-200 py-4">
         <img
@@ -22,7 +21,7 @@ export default function ProductCard({ product = {} }) {
         <Card.Title className="text-lg">{name}</Card.Title>
         <Card.Text className="font-semibold mt-1">${price}</Card.Text>
         <Card.Box className="flex justify-between items-center mt-4">
-          <StarRating size={18} color="#0B3954" ratingValue={rating} />
+          <StarRating size={18} color="#11c47f" ratingValue={rating} />
           <Card.Text className="font-semibold flex-grow-0">{brand}</Card.Text>
         </Card.Box>
       </Card.Body>

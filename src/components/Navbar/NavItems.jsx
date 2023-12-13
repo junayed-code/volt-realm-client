@@ -19,7 +19,7 @@ const navItems = [
   },
 ];
 
-export default function NavItems({ className = "" }) {
+export default function NavItems({ className = "", onItemClick }) {
   const { currentUser } = useAuth();
 
   return (
@@ -29,7 +29,8 @@ export default function NavItems({ className = "" }) {
         .map(item => (
           <li key={item.name}>
             <NavLink
-              className="font-medium text-neutral/80 hover:underline underline-offset-4"
+              onClick={onItemClick}
+              className="font-medium text-base-content/75 hover:underline underline-offset-4"
               to={item.path}
             >
               {item.name}

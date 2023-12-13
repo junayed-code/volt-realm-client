@@ -1,39 +1,31 @@
-import { useLoaderData } from "react-router-dom";
-import { Container, Section, StarRating, Card, Button } from "../components";
+import { useParams } from "react-router-dom";
+import {
+  Container,
+  Section,
+  StarRating,
+  Card,
+  Button,
+  Loading,
+} from "../components";
 import { useCartStorage } from "../hooks";
-import Swal from "sweetalert2";
-
-const mySwal = Swal.mixin({
-  customClass: {
-    confirmButton: "button button-primary",
-    title: "p-5 pb-0",
-  },
-  buttonsStyling: false,
-});
-
-// Product loader function
-export async function productLoader({ params }) {
-  const res = await fetch(
-    `https://volt-realm-api.vercel.app/products/${params.name}`
-  );
-  const resObject = await res.json();
-  if (resObject.error) {
-    throw new Response(null, {
-      status: resObject.error?.status,
-      statusText: resObject.error?.message,
-    });
-  }
-  return resObject.data;
-}
+import { mySwal } from "../utils";
+import { useQuery } from "@tanstack/react-query";
+import { getProductByNameSlug } from "../services/api";
 
 export default function ProductDetails() {
-  const { cartItems, updateCart } = useCartStorage();
-  const { name, image, brand, rating, price, description } = useLoaderData();
+  const { addItem } = useCartStorage();
+  const { name: nameSlug } = useParams();
+  const { data, isLoading } = useQuery({
+    queryKey: [nameSlug],
+    queryFn: getProductByNameSlug.bind(null, nameSlug),
+  });
 
+  if (isLoading) return <Loading />;
+
+  const { name, image, brand, rating, price, description } = data || {};
   const handleAddProductToCart = () => {
-    const newItem = { id: Date.now(), name, image, price };
-    updateCart([...cartItems, newItem]);
-    mySwal.fire({
+    addItem({ name, image, price });
+    mySwal({ title: "p-5 pb-0" }).fire({
       icon: "success",
       title: name,
       text: "The product was successfully added to the cart.",
@@ -52,13 +44,13 @@ export default function ProductDetails() {
             />
           </Card.Image>
           <Card.Body className="p-0 flex-1 text-secondary min-h-[350px]">
-            <Card.Text className="text-sm font-semibold p-1 px-4 bg-primary/25 rounded-md w-fit flex-grow-0">
+            <Card.Text className="text-sm font-semibold p-1 px-4 bg-secondary/25 rounded-md w-fit flex-grow-0">
               {brand}
             </Card.Text>
             <Card.Title className="text-3xl sm:text-4xl font-bold">
               {name}
             </Card.Title>
-            <StarRating size="18" color="#276c96" ratingValue={rating} />
+            <StarRating size="18" color="#11c47f" ratingValue={rating} />
 
             <Card.Text className="text-lg mt-2 font-medium opacity-90">
               {description}

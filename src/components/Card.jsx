@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function Card({ className = "", to, children }) {
-  if (to !== undefined) {
+  if (to) {
     return (
       <Link className={"card ".concat(className).trim()} to={to}>
         {children}

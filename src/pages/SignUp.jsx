@@ -14,14 +14,14 @@ const initialValues = {
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const { currentUser, createNewUser, logInWithGoogle } = useAuth();
-  if (currentUser) return navigate("/");
+  const { currentUser, loading, createNewUser, logInWithGoogle } = useAuth();
+  if (!loading && currentUser) return navigate("/");
 
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
       initialValues,
       validationSchema: signUpSchema,
-      onSubmit: async (values, { resetForm, setSubmitting, setFieldError }) => {
+      onSubmit: async (values, { resetForm, setFieldError }) => {
         try {
           const { uname, email, password } = values;
           await createNewUser(uname, email, password);
@@ -30,7 +30,6 @@ export default function SignUp() {
           resetForm();
           navigate("/");
         } catch (err) {
-          setSubmitting(false);
           if (err.code === "auth/email-already-in-use") {
             setFieldError("email", "This email is already used.");
           }
@@ -42,10 +41,12 @@ export default function SignUp() {
     logInWithGoogle().then(() => navigate("/"));
   };
 
+  if (loading) return;
+
   return (
     <Section className="min-h-[calc(100vh-80px)] px-2 py-8">
-      <Container>
-        <Section.Content className="bg-white w-full flex">
+      <Container className="relative">
+        <Section.Content className="bg-base-100 w-full flex">
           <div className="flex-1">
             <Section.Title className="text-center mb-5">
               Create a Account
@@ -106,7 +107,7 @@ export default function SignUp() {
           </div>
           <div className="flex-1 hidden lg:flex items-center">
             <img
-              src="/images/illustration/signup.jpg"
+              src="/images/illustration/signup.png"
               alt="Illustration image"
             />
           </div>

@@ -1,14 +1,20 @@
 import { BsFacebook, BsYoutube, BsTwitter, BsInstagram } from "react-icons/bs";
-
-import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
+import { useTheme } from "../hooks";
+import logoLight from "../assets/logo-light.svg";
+import logoDark from "../assets/logo-dark.svg";
 
 export default function Footer() {
+  const { currentTheme } = useTheme();
   return (
     <footer className="footer p-10 py-14 bg-secondary/30 text-base-content text-base">
       <aside>
-        <Link>
-          <img className="max-h-6" src={logo} alt="Volt Realm" />
+        <Link to="/">
+          <img
+            className="h-8"
+            src={currentTheme === "light" ? logoLight : logoDark}
+            alt="Volt Realm"
+          />
         </Link>
         <div className="py-6 flex gap-4">
           <Link className="text-base-content/70 hover:text-base-content">

@@ -28,7 +28,7 @@ export default function ProductTypes() {
 
 function ProductTypeCard({ name, image }) {
   return (
-    <Card className="max-w-[250px] mx-auto border">
+    <Card className="max-w-[250px] mx-auto border border-base-content/25">
       <Card.Image className="bg-base-100">
         <img
           className="max-h-40 w-full aspect-video object-cover"

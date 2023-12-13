@@ -13,14 +13,14 @@ const initialValues = {
 
 export default function Login() {
   const navigate = useNavigate();
-  const { logIn, logInWithGoogle, currentUser } = useAuth();
-  if (currentUser) return navigate("/");
+  const { logIn, loading, logInWithGoogle, currentUser } = useAuth();
+  if (!loading && currentUser) return navigate("/");
 
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
       initialValues,
       validationSchema: logInSchema,
-      onSubmit: async (values, { resetForm, setSubmitting, setFieldError }) => {
+      onSubmit: async (values, { resetForm, setFieldError }) => {
         try {
           const { email, password } = values;
           await logIn(email, password);
@@ -33,7 +33,6 @@ export default function Login() {
             "password",
             "Incorrect email or password! Please try again."
           );
-          setSubmitting(false);
         }
       },
     });
@@ -44,9 +43,11 @@ export default function Login() {
     });
   };
 
+  if (loading) return;
+
   return (
     <Section className="min-h-[calc(100vh-80px)] px-2 py-8">
-      <Container>
+      <Container className="relative">
         <Section.Content className="bg-base-100 w-full lg:flex flex-row-reverse">
           <div className="flex-1 self-center">
             <Section.Title className="text-center mb-5">
@@ -75,7 +76,7 @@ export default function Login() {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              <Button type="submit" className="text-lg btn-primary mt-3">
+              <Button type="submit" className={`text-lg btn-primary mt-3`}>
                 Login
               </Button>
 
@@ -99,11 +100,12 @@ export default function Login() {
           </div>
           <div className="flex-1 hidden lg:flex items-center">
             <img
-              src="/images/illustration/login.jpg"
+              src="/images/illustration/login.png"
               alt="Illustration image"
             />
           </div>
         </Section.Content>
+        {/* {loading && <Loading />} */}
       </Container>
     </Section>
   );

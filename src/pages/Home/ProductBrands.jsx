@@ -2,8 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { Section, Container, Card } from "../../components";
 import Marquee from "react-fast-marquee";
 import { fetchData } from "../../utils";
+import { useTheme } from "../../hooks";
 
 export default function ProductBrands() {
+  const { currentTheme } = useTheme();
   const { data: brands } = useQuery({
     queryKey: ["brands"],
     queryFn: fetchData.bind(null, "/data/brands.json"),
@@ -14,7 +16,12 @@ export default function ProductBrands() {
     <Section className="py-12 md:pt-16 md:pb-24">
       <Container>
         <Section.Title>Our Featured Brands</Section.Title>
-        <Marquee className="mt-10" pauseOnHover gradient gradientWidth={80}>
+        <Marquee
+          className="mt-10"
+          gradient
+          gradientWidth={100}
+          gradientColor={currentTheme === "light" ? "#FFF" : "#1f2328"}
+        >
           {brands?.map(brand => (
             <BrandCard key={brand.name} name={brand.name} image={brand.image} />
           ))}
@@ -27,7 +34,7 @@ export default function ProductBrands() {
 function BrandCard({ image, name }) {
   return (
     <Card
-      className="max-w-xs mx-4 rounded-sm border border-secondary hover:shadow-2xl shadow-inner"
+      className="max-w-xs mx-4 rounded-sm bg-base-200 border border-base-content/25"
       to={`products/brand/${name}`}
     >
       <Card.Image className="relative p-4 pt-0">
